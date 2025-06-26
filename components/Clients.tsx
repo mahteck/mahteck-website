@@ -1,8 +1,8 @@
 'use client'
 
 import { useKeenSlider } from 'keen-slider/react'
+import 'keen-slider/keen-slider.min.css'
 import Image from 'next/image'
-import { useEffect, useRef } from 'react'
 
 const logos = [
   '/client1.png',
@@ -13,23 +13,54 @@ const logos = [
   '/client6.png',
 ]
 
-const Clients = () => {
-  const [sliderRef] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: {
-      perView: 4,
-      spacing: 15,
-    },
-    breakpoints: {
-      '(max-width: 768px)': {
-        slides: { perView: 2 },
-      },
-      '(max-width: 1024px)': {
-        slides: { perView: 3 },
-      },
-    },
-    autoplay: true,
+const Autoplay = (slider: any) => {
+  let timeout: ReturnType<typeof setTimeout>
+  let mouseOver = false
+
+  const clearNextTimeout = () => clearTimeout(timeout)
+
+  const nextTimeout = () => {
+    clearTimeout(timeout)
+    if (mouseOver) return
+    timeout = setTimeout(() => slider.next(), 2000)
+  }
+
+  slider.on('created', () => {
+    slider.container.addEventListener('mouseover', () => {
+      mouseOver = true
+      clearNextTimeout()
+    })
+    slider.container.addEventListener('mouseout', () => {
+      mouseOver = false
+      nextTimeout()
+    })
+    nextTimeout()
   })
+
+  slider.on('dragStarted', clearNextTimeout)
+  slider.on('animationEnded', nextTimeout)
+  slider.on('updated', nextTimeout)
+}
+
+const Clients = () => {
+  const [sliderRef] = useKeenSlider<HTMLDivElement>(
+    {
+      loop: true,
+      slides: {
+        perView: 4,
+        spacing: 15,
+      },
+      breakpoints: {
+        '(max-width: 768px)': {
+          slides: { perView: 2 },
+        },
+        '(max-width: 1024px)': {
+          slides: { perView: 3 },
+        },
+      },
+    },
+    [Autoplay]
+  )
 
   return (
     <section className="bg-gray-100 py-20 px-6">

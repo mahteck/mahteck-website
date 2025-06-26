@@ -39,6 +39,7 @@ npm -v
    npm install aos
    npm install keen-slider
    npm install react-slick slick-carousel
+   
    ```
 
 3. **Run development server**:
