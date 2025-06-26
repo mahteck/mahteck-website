@@ -30,3 +30,37 @@ Thumbs.db
 # misc
 .next/
 *.log
+
+
+# Optional lockfiles (if using only one package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Misc
+*.log
+*.tgz
+.cache/
+.next/cache/
+.vercel/
+*.local
+public/temp/
+dist/
+
+# Test snapshots
+__snapshots__/
+*.spec.js.snap
+*.test.js.snap
+
+# Storybook build
+out-storybook/
+
+# SASS/SCSS Cache
+.sass-cache/
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Netlify
+.netlify/

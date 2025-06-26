@@ -124,7 +124,7 @@ https://yourproject.vercel.app
 
 Mahteck – Software & Digital Solutions  
 🌐 [www.mahteck.com](http://www.mahteck.com)  
-📧 contact@mahteck.com  
+📧 mahteckteach@mahteck.com  
 📍 Karachi, Pakistan
 
 ---
